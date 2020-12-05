@@ -301,6 +301,18 @@ public class ArvoreAvl {
 		return ret;
 	}
 
+	final public ArrayList<No> posOrder() {
+		ArrayList<No> ret = new ArrayList<No>();
+		posOrder(raiz, ret);
+		return ret;
+	}
+
+	final public ArrayList<No> preOrder() {
+		ArrayList<No> ret = new ArrayList<No>();
+		preOrder(raiz, ret);
+		return ret;
+	}
+
 	//Faz os laços e a recursividade do inOrder
 	final protected void inorder(No no, ArrayList<No> lista) {
 		if (no == null) {
@@ -309,6 +321,24 @@ public class ArvoreAvl {
 		inorder(no.getEsquerda(), lista);
 		lista.add(no);
 		inorder(no.getDireita(), lista);
+	}
+
+	final protected void posOrder(No no, ArrayList<No> lista) {
+		if (no == null) {
+			return;
+		}
+		posOrder(no.getEsquerda(), lista);
+		posOrder(no.getDireita(), lista);
+		lista.add(no);
+	}
+	
+	final protected void preOrder(No no, ArrayList<No> lista) {
+		if (no == null) {
+			return;
+		}
+		lista.add(no);
+		preOrder(no.getEsquerda(), lista);
+		preOrder(no.getDireita(), lista);
 	}
 
 	//busca o valor do balanceamento da arvore
@@ -329,37 +359,43 @@ public class ArvoreAvl {
         }
         
 		String separador = String.valueOf("  |__");
-
+		// [1, 2, 3][1, 3, 2][2, 1, 3]
 		switch (tipoOrdenacao) {
 			case "pre":
-				System.out.println("\n" + this.raiz.toString() + " (" + altura(raiz) + ") ");
-				mostraSubArvore(raiz.getEsquerda(),  separador);
-				mostraSubArvore(raiz.getDireita(), separador);
+				System.out.println("\n" + this.raiz.toString() + "----|");
+				mostraSubArvore(raiz.getEsquerda(),  separador, false);
+				mostraSubArvore(raiz.getDireita(), separador, false);
 				break;
 			case "pos":
-				mostraSubArvore(raiz.getEsquerda(),  separador);
-				mostraSubArvore(raiz.getDireita(), separador);
-				System.out.println("\n" + this.raiz.toString() + " (" + altura(raiz) + ") ");
+				mostraSubArvore(raiz.getEsquerda(),  "", false);
+				mostraSubArvore(raiz.getDireita(), separador, true);
+				System.out.println("     "+this.raiz.toString() + " (DIREITA)");
 				break;
 			default:
-				mostraSubArvore(raiz.getEsquerda(),  separador);
-				System.out.println("\n" + this.raiz.toString() + " (" + altura(raiz) + ") ");
-				mostraSubArvore(raiz.getDireita(), separador);
+				mostraSubArvore(raiz.getEsquerda(),  "", false);
+				System.out.println("     "+this.raiz.toString() + " (ESQUERDA)");
+				mostraSubArvore(raiz.getDireita(), separador, false);
 				break;
 		}
 	}
 
 	//laço recusrsivo para mostrar a arvore completa
-	private void mostraSubArvore(No no, String separador) {
+	private void mostraSubArvore(No no, String separador, boolean inverter) {
 		if (no != null) {
 			No pai = no.getPai();
-            String exibir = separador + no.toString() + " (altura " + altura(no) + ") ";
-            exibir += no.equals(pai.getEsquerda()) == true ? " (ESQUERDA) " : " (DIREITA) ";
-            
+            String exibir = separador + no.toString();
+			exibir += (no.equals(pai.getEsquerda()) == true && inverter == false)
+				? " (ESQUERDA) "
+				: " (DIREITA) ";
+			
+			if (separador == "") {
+				exibir = "\n" + no.toString() + "----|";
+			}
+
             System.out.println(exibir);
             
-			mostraSubArvore(no.getEsquerda(),  "     "+separador);
-			mostraSubArvore(no.getDireita(), "     "+separador);
+			mostraSubArvore(no.getEsquerda(),  "     "+separador, inverter);
+			mostraSubArvore(no.getDireita(), "     "+separador, inverter);
 		}
 	}
 
