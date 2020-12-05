@@ -384,7 +384,7 @@ public class ArvoreAvl {
 		if (no != null) {
 			No pai = no.getPai();
             String exibir = separador + no.toString();
-			exibir += (no.equals(pai.getEsquerda()) == true && inverter == false)
+			exibir += (no.equals(pai.getEsquerda()) == true || inverter)
 				? " (ESQUERDA) "
 				: " (DIREITA) ";
 			
