@@ -23,9 +23,13 @@ public class Main {
         System.out.println("--");
         System.out.println("3 - Verificar se a árvore está balanceada");
         System.out.println("--");
-        System.out.println("4 - Imprimir árvore");
+        System.out.println("4 - Imprimir árvore In Order");
         System.out.println("--");
-        System.out.println("5 - Sair");
+        System.out.println("5 - Imprimir árvore Pos Order");
+        System.out.println("--");
+        System.out.println("6 - Imprimir árvore Pre Order");
+        System.out.println("--");
+        System.out.println("7 - Sair");
         Scanner sc = new Scanner(System.in);
         int opcao = sc.nextInt();
         acao(opcao);
@@ -58,10 +62,18 @@ public class Main {
                 }
                     break;
             case 4:
-                arvore.mostraArvore();
+                arvore.mostraArvore("in");
                 opcoes();
                     break;
             case 5:
+                arvore.mostraArvore("pos");
+                opcoes();
+                    break;
+            case 6:
+                arvore.mostraArvore("pre");
+                opcoes();
+                    break;
+            case 7:
                 break;
 
             default: opcoes();

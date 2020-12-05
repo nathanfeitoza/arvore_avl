@@ -294,16 +294,31 @@ public class ArvoreAvl {
 	}
 
 	//monta e mostra a Arvore
-	public void mostraArvore() {
+	public void mostraArvore(String tipoOrdenacao) {
 		if (isEmpty()) {
 			System.out.println("Árvore vazia!");
 			return;
         }
         
 		String separador = String.valueOf("  |__");
-		System.out.println("\n" + this.raiz.toString() + " (" + altura(raiz) + ") ");
-		mostraSubArvore(raiz.getEsquerda(),  separador);
-		mostraSubArvore(raiz.getDireita(), separador);
+
+		switch (tipoOrdenacao) {
+			case "pre":
+				System.out.println("\n" + this.raiz.toString() + " (" + altura(raiz) + ") ");
+				mostraSubArvore(raiz.getEsquerda(),  separador);
+				mostraSubArvore(raiz.getDireita(), separador);
+				break;
+			case "pos":
+				mostraSubArvore(raiz.getEsquerda(),  separador);
+				mostraSubArvore(raiz.getDireita(), separador);
+				System.out.println("\n" + this.raiz.toString() + " (" + altura(raiz) + ") ");
+				break;
+			default:
+				mostraSubArvore(raiz.getEsquerda(),  separador);
+				System.out.println("\n" + this.raiz.toString() + " (" + altura(raiz) + ") ");
+				mostraSubArvore(raiz.getDireita(), separador);
+				break;
+		}
 	}
 
 	//laço recusrsivo para mostrar a arvore completa
