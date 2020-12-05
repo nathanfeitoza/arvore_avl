@@ -107,6 +107,34 @@ public class ArvoreAvl {
 		}
 	}
 
+	public void buscarElemento(int chave) {
+		if (this.raiz == null) {
+			return;
+		}
+		
+		No raiz = this.raiz;
+		int valorEncontrado = -1;
+		
+		while (raiz.getChave() != chave) {
+			if (chave < raiz.getChave()) {
+				raiz = raiz.getEsquerda(); // caminha para esquerda
+			} else {
+				raiz = raiz.getDireita(); // caminha para direita
+			}
+
+			if (raiz == null) {
+				break;
+			} else {
+				valorEncontrado = raiz.getChave();
+			}
+		}
+		
+		String mensagem = raiz != null ? "Valor encontrado" : "Valor não encontrado";
+		System.out.print("\n\n ");
+		System.out.print(mensagem);
+		System.out.print("\n\n ");
+	}
+
 	//faz verificações antes de remover
 	public void removerNoEncontrado(No aRemover) {
 		No r;

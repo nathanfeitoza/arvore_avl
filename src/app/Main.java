@@ -29,7 +29,9 @@ public class Main {
         System.out.println("--");
         System.out.println("6 - Imprimir árvore Pre Order");
         System.out.println("--");
-        System.out.println("7 - Sair");
+        System.out.println("7 - Buscar valor");
+        System.out.println("--");
+        System.out.println("8 - Sair");
         Scanner sc = new Scanner(System.in);
         int opcao = sc.nextInt();
         acao(opcao);
@@ -74,6 +76,12 @@ public class Main {
                 opcoes();
                     break;
             case 7:
+                System.out.println("\nDigite o elemento que será buscado:");
+                elemento = sc.nextInt();
+                arvore.buscarElemento(elemento);
+                opcoes();
+                    break;
+            case 8:
                 break;
 
             default: opcoes();
