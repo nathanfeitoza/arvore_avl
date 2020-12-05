@@ -359,7 +359,7 @@ public class ArvoreAvl {
         }
         
 		String separador = String.valueOf("  |__");
-		// [1, 2, 3][1, 3, 2][2, 1, 3]
+		
 		switch (tipoOrdenacao) {
 			case "pre":
 				System.out.println("\n" + this.raiz.toString() + "----|");
